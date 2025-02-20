@@ -5,7 +5,7 @@ import { useAncientStore } from "../store/useStore";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
-mapboxgl.accessToken = "pk.eyJ1IjoibWFyaWF2YXJnYXNnIiwiYSI6ImNtNjdkc3ZiOTAwMnMyaXB0NXMwcnU5ejMifQ.bsJZ4iaQNoHkX1r05_Y8hg";
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_KEY;
 
 export const Map = () => {
   const { index, setProperties } = useAncientStore((state) => state);
@@ -67,8 +67,9 @@ export const Map = () => {
         removeEmpireLayer(currentEmpireId.current);
       }
     };
-  }, [index]);
+  }, [index, setProperties]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addEmpireLayer = (id: string, data: any) => {
     if (!mapRef.current) return;
 
